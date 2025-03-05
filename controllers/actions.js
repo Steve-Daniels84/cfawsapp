@@ -12,7 +12,7 @@ const UPLOAD_TEMP_PATH = path.join(__dirname, "../temp");
 
 const s3Client = new S3Client({
   region: process.env.AWS_DEFAULT_REGION || "us-east-1",
-  endpoint: "http://localhost:4566",
+  endpoint: "http://localhost:4566", //remove this line before deployment
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID || "test",
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "test",
@@ -21,7 +21,7 @@ const s3Client = new S3Client({
 });
 
 const listObjectsParams = {
-  Bucket: "test-bucket-steve",
+  Bucket: "test-bucket-steve", //ensure this matches the bucket you are going to use before deployment
 };
 
 //List all objects in the bucket
@@ -58,7 +58,7 @@ async function addObject(req, res) {
     // Upload the file to S3
     const fileStream = fs.createReadStream(tempPath);
     const command = new PutObjectCommand({
-      Bucket: "test-bucket-steve",
+      Bucket: "test-bucket-steve", //ensure this matches the bucket you are going to use before deployment
       Key: fileName,
       Body: fileStream,
     });
